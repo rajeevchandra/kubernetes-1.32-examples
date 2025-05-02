@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: nfd-worker
+  namespace: node-feature-discovery
+spec:
+  selector:
+    matchLabels:
+      name: nfd-worker
+  template:
+    metadata:
+      labels:
+        name: nfd-worker
+    spec:
+      containers:
+        - name: nfd-worker
+          image: k8s.gcr.io/nfd/node-feature-discovery:latest
+          args:
+            - "-feature-sources=cpu,pci"

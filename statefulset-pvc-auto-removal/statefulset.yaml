@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: data-processor
+spec:
+  serviceName: "data-service"
+  replicas: 3
+  selector:
+    matchLabels:
+      app: data-processor
+  persistentVolumeClaimRetentionPolicy:
+    whenDeleted: Delete
+    whenScaled: Delete
+  template:
+    metadata:
+      labels:
+        app: data-processor
+    spec:
+      containers:
+        - name: processor
+          image: your-data-processor-image
+          volumeMounts:
+            - name: data-storage
+              mountPath: /data
+  volumeClaimTemplates:
+    - metadata:
+        name: data-storage
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 10Gi

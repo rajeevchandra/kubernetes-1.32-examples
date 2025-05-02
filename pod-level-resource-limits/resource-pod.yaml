@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: resource-shared-pod
+spec:
+  containers:
+    - name: container-a
+      image: your-app-image
+    - name: container-b
+      image: your-app-image
+  resources:
+    limits:
+      cpu: "2"
+      memory: "4Gi"
+    requests:
+      cpu: "1"
+      memory: "2Gi"

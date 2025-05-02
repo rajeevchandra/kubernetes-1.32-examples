@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: windows-app
+spec:
+  nodeSelector:
+    kubernetes.io/os: windows
+  terminationGracePeriodSeconds: 60
+  containers:
+    - name: app
+      image: your-windows-app-image
+      command: ["powershell", "-Command", "Start-Sleep -Seconds 300"]

@@ -1,0 +1,10 @@
+apiVersion: snapshot.storage.k8s.io/v1
+kind: VolumeGroupSnapshot
+metadata:
+  name: app-group-snapshot
+spec:
+  source:
+    selector:
+      matchLabels:
+        app: multi-volume-app
+  volumeSnapshotClassName: csi-snapshot-class
